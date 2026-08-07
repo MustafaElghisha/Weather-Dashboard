@@ -31,7 +31,7 @@ export default function AdditionalInfo({
       childrenClassName="flex flex-col gap-8 2xl:grid 2xl:grid-cols-2 2xl:grid-rows-3 2xl:h-full"
     >
       {rows.map(({ label, value, Icon }) => (
-        <div className="flex justify-between" key={label}>
+        <div key={label} className="flex justify-between">
           <div className="flex gap-4">
             <span className="text-gray-500">{label}</span>
             <Icon className="size-6" />

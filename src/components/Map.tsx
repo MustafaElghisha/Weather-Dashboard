@@ -1,6 +1,7 @@
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { coords } from "../types/map";
+import { useTheme } from "./ThemeProvider";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
@@ -15,6 +16,8 @@ export default function Map({
   onMapClick,
   mapType,
 }: MapProps) {
+  const { theme } = useTheme();
+
   return (
     <MapContainer
       center={[lat, lng]}
@@ -28,20 +31,25 @@ export default function Map({
       className="h-full w-full"
     >
       <MapClick coords={{ lat, lng }} onMapClick={onMapClick} />
-      <TileLayer
-        url={`https://api.maptiler.com/maps/backdrop-v4-dark/{z}/{x}/{y}@2x.png?key=zekAGYe1TUVm0MkRxA2k`}
-        noWrap={true}
-        minZoom={2}
-        tileSize={512}
-        zoomOffset={-1}
-      />
-      <TileLayer
-        url={`https://api.maptiler.com/maps/dataviz-v4/{z}/{x}/{y}@2x.png?key=zekAGYe1TUVm0MkRxA2k`}
-        noWrap={true}
-        minZoom={2}
-        tileSize={512}
-        zoomOffset={-1}
-      />
+
+      {theme === "dark" ? (
+        <TileLayer
+          url={`https://api.maptiler.com/maps/backdrop-v4-dark/{z}/{x}/{y}@2x.png?key=zekAGYe1TUVm0MkRxA2k`}
+          noWrap={true}
+          minZoom={2}
+          tileSize={512}
+          zoomOffset={-1}
+        />
+      ) : (
+        <TileLayer
+          url={`https://api.maptiler.com/maps/dataviz-v4/{z}/{x}/{y}@2x.png?key=zekAGYe1TUVm0MkRxA2k`}
+          noWrap={true}
+          minZoom={2}
+          tileSize={512}
+          zoomOffset={-1}
+        />
+      )}
+
       <TileLayer
         url={`https://tile.openweathermap.org/map/${mapType + "_new"}/{z}/{x}/{y}.png?appid=${API_KEY}`}
       />

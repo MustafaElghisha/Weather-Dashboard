@@ -9,7 +9,7 @@ export default function AdditionalInfoSkeleton() {
       childrenClassName="flex flex-col gap-8 2xl:grid 2xl:grid-cols-2 2xl:grid-rows-3 2xl:h-full"
     >
       {Array.from({ length: 6 }).map((_, index) => (
-        <div className="flex justify-between" key={index}>
+        <div key={index} className="flex justify-between">
           <div className="flex gap-4">
             <Skeleton className="h-6 w-26" />
             <Skeleton className="size-6 rounded-full" />

@@ -82,7 +82,7 @@ function AirPollution({ lat, lng }: { lat: number; lng: number }) {
           <span className="text-gray-500">1</span>
           <span className="text-gray-500">5</span>
         </div>
-        <div className="flex justify-between">
+        <ol className="flex justify-between">
           {AIR_QUALITY_LEVELS.map((quality, index) => {
             const currentLevel = (() => {
               switch (data.list[0].main.aqi) {
@@ -100,7 +100,8 @@ function AirPollution({ lat, lng }: { lat: number; lng: number }) {
             })();
 
             return (
-              <span
+              <li
+                key={quality}
                 className={clsx(
                   "rounded-md border px-2 py-1 text-xs font-semibold",
                   index + 1 === data.list[0].main.aqi
@@ -109,10 +110,10 @@ function AirPollution({ lat, lng }: { lat: number; lng: number }) {
                 )}
               >
                 {quality}
-              </span>
+              </li>
             );
           })}
-        </div>
+        </ol>
       </Card>
 
       {Object.entries(data.list[0].components).map(([key, value]) => {
@@ -161,9 +162,10 @@ function AirPollution({ lat, lng }: { lat: number; lng: number }) {
               <span className="text-gray-500">0</span>
               <span className="text-gray-500">{max}</span>
             </div>
-            <div className="flex justify-between">
+            <ol className="flex justify-between">
               {Object.keys(pollutant).map((quality) => (
-                <span
+                <li
+                  key={quality}
                   className={clsx(
                     "rounded-md border px-2 py-1 text-xs font-semibold",
                     quality === currentLevel
@@ -172,9 +174,9 @@ function AirPollution({ lat, lng }: { lat: number; lng: number }) {
                   )}
                 >
                   {quality}
-                </span>
+                </li>
               ))}
-            </div>
+            </ol>
           </Card>
         );
       })}

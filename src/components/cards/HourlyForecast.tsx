@@ -22,7 +22,7 @@ export default function HourlyForecast({
       childrenClassName="flex gap-6 overflow-scroll 2xl:h-full"
     >
       {data.hourly.map((hour) => (
-        <div className="flex flex-col items-center gap-2 p-2" key={hour.dt}>
+        <div key={hour.dt} className="flex flex-col items-center gap-2 p-2">
           <p className="whitespace-nowrap">
             {new Date(hour.dt * 1000).toLocaleTimeString(undefined, {
               hour: "numeric",
