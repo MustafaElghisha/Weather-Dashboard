@@ -6,10 +6,16 @@ type WeatherIconProps = {
 };
 
 export default function WeatherIcon({ src, className }: WeatherIconProps) {
+  const isDev = import.meta.env.DEV;
+
   return (
     <img
       className={clsx("size-8", className)}
-      src={`/api/weather-icon?icon=${src}`}
+      src={
+        isDev
+          ? `https://openweathermap.org/img/wn/${src}@2x.png`
+          : `/api/weather-icon?icon=${src}`
+      }
       alt="Weather Icon"
     />
   );

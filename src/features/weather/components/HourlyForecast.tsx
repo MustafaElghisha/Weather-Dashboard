@@ -13,7 +13,7 @@ export default function HourlyForecast() {
     <Card
       title="Hourly Forecast (48 Hours)"
       className="2xl:h-full"
-      childrenClassName="flex gap-6 overflow-scroll 2xl:h-full"
+      childrenClassName="flex gap-6 overflow-scroll 2xl:h-full scrollbar-none"
     >
       {weatherData.hourly.map((hour) => (
         <div key={hour.dt} className="flex flex-col items-center gap-2 p-2">
