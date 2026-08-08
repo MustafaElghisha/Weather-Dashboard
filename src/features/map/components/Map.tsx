@@ -1,8 +1,20 @@
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { useTheme } from "../../../app/ThemeProvider";
 import { useCoordinates } from "../../../app/CoordinatesProvider";
 import type { Dispatch, SetStateAction } from "react";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerIcon2x,
+  shadowUrl: markerShadow,
+});
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
