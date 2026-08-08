@@ -30,14 +30,14 @@ export default function Sidebar({
   } = useCoordinates();
 
   return (
-    <div
+    <aside
       className={clsx(
         "bg-sidebar border-sidebar-border fixed top-0 right-0 h-dvh w-(--sidebar-width) scrollbar-none overflow-y-scroll border p-3 shadow-md transition-transform duration-500 sm:p-4 lg:translate-x-0!",
         isSidebarOpen ? "translate-x-0" : "translate-x-full",
       )}
     >
       <div className="mb-4 flex justify-between">
-        <h1 className="text-2xl font-bold">Air Polution</h1>
+        <h1 className="text-2xl font-bold">Air Pollution</h1>
         <button onClick={() => setIsSidebarOpen(false)}>
           <Chevron className="size-6 rotate-180 cursor-pointer lg:hidden" />
         </button>
@@ -45,7 +45,7 @@ export default function Sidebar({
       <Suspense fallback={<SidebarSkeleton />}>
         <AirPollution lat={lat} lng={lng} />
       </Suspense>
-    </div>
+    </aside>
   );
 }
 

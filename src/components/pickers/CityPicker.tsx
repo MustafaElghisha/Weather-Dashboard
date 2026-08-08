@@ -10,6 +10,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useCoordinates } from "../CoordinatesProvider";
+import MapLocation from "/src/assets/mapLocation.svg?react";
 
 const capitalize = (str: string) =>
   str?.charAt(0).toUpperCase() + str?.slice(1) || "";
@@ -36,8 +37,15 @@ export default function CityPicker() {
       value={capitalize(location)}
       onValueChange={(value) => value && setLocation(value)}
     >
-      <ComboboxInput placeholder="Select a city" />
-      <ComboboxContent>
+      <div className="relative flex w-38 items-center">
+        <MapLocation className="ti ti-map-pin text-muted-foreground pointer-events-none absolute left-3 size-4 text-sm" />
+        <ComboboxInput
+          placeholder="Select a city"
+          className="border-2 pl-6"
+          showClear
+        />
+      </div>
+      <ComboboxContent className="w-38">
         <ComboboxEmpty>No cities found.</ComboboxEmpty>
         <ComboboxList>
           {(city) => (

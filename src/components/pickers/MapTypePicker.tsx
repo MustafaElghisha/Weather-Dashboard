@@ -7,6 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import type { Dispatch, SetStateAction } from "react";
+import Layer from "/src/assets/layer.svg?react";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
@@ -36,10 +37,11 @@ export default function MapTypePicker({
         setMapType(value?.toLocaleLowerCase() as MapType)
       }
     >
-      <SelectTrigger className="w-35">
+      <SelectTrigger className="w-38 border-2">
+        <Layer />
         <SelectValue placeholder="Map Type" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent alignItemWithTrigger={false}>
         <SelectGroup>
           {MAP_TYPES.map((type) => (
             <SelectItem
