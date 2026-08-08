@@ -1,6 +1,6 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from "./Card";
-import { getWeather } from "../../api";
+import useWeather from "@/hooks/useWeather";
+import type { coords } from "../../types/map";
 
 import Sunrise from "/src/assets/sunrise.svg?react";
 import Sunset from "/src/assets/sunset.svg?react";
@@ -9,7 +9,6 @@ import Uv from "/src/assets/uv.svg?react";
 import Wind from "/src/assets/wind.svg?react";
 import Pressure from "/src/assets/pressure.svg?react";
 import UpArrow from "/src/assets/uparrow.svg?react";
-import type { coords } from "../../types/map";
 
 type AdditionalInfo = {
   coords: coords;
@@ -18,11 +17,7 @@ type AdditionalInfo = {
 export default function AdditionalInfo({
   coords: { lat, lng },
 }: AdditionalInfo) {
-  const { data } = useSuspenseQuery({
-    queryKey: ["weather", lat, lng],
-    queryFn: () => getWeather({ lat, lng }),
-    refetchOnWindowFocus: false,
-  });
+  const weatherData = useWeather(lat, lng);
 
   return (
     <Card
@@ -37,7 +32,10 @@ export default function AdditionalInfo({
             <Icon className="size-6" />
           </div>
           <span>
-            <FormatComponent value={value} number={data.current[value]} />
+            <FormatComponent
+              value={value}
+              number={weatherData.current[value]}
+            />
           </span>
         </div>
       ))}

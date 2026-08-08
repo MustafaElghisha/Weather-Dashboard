@@ -35,7 +35,7 @@ export default function Sidebar({
       )}
     >
       <div className="mb-4 flex justify-between">
-        <h1 className="text-2xl font-bold">Air Polution</h1>{" "}
+        <h1 className="text-2xl font-bold">Air Polution</h1>
         <button onClick={() => setIsSidebarOpen(false)}>
           <Chevron className="size-6 rotate-180 cursor-pointer lg:hidden" />
         </button>
@@ -276,16 +276,16 @@ const pollutantNameMapping: Record<Pollutant, string> = {
 const getQualityColor = (currentLevel: AirQualityLevel) => {
   switch (currentLevel) {
     case "Good":
-      return `bg-green-500`;
+      return `bg-green-500 border-green-500`;
     case "Fair":
-      return `bg-yellow-500`;
+      return `bg-yellow-500 border-yellow-500`;
     case "Moderate":
-      return `bg-orange-500`;
+      return `bg-orange-500 border-orange-500`;
     case "Poor":
-      return `bg-red-500`;
+      return `bg-red-500 border-red-500`;
     case "Very Poor":
-      return `bg-purple-500`;
+      return `bg-purple-500 border-purple-500`;
     default:
-      return "bg-zinc-500";
+      return "bg-zinc-500 border-zinc-500";
   }
 };

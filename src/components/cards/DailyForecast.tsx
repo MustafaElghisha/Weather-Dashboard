@@ -1,23 +1,19 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from "./Card";
-import { getWeather } from "../../api";
-import WeatherIcon from "../WeatherIcon";
+import useWeather from "@/hooks/useWeather";
 import type { coords } from "../../types/map";
+
+import WeatherIcon from "../WeatherIcon";
 
 type DailyForecastProps = { coords: coords };
 
 export default function DailyForecast({
   coords: { lat, lng },
 }: DailyForecastProps) {
-  const { data } = useSuspenseQuery({
-    queryKey: ["weather", lat, lng],
-    queryFn: () => getWeather({ lat, lng }),
-    refetchOnWindowFocus: false,
-  });
+  const weatherData = useWeather(lat, lng);
 
   return (
     <Card title="Daily Forecast" childrenClassName="flex flex-col gap-4">
-      {data.daily.map((day) => (
+      {weatherData.daily.map((day) => (
         <div key={day.dt} className="flex items-center justify-between">
           <p className="flex-1">
             {new Date(day.dt * 1000).toLocaleDateString(undefined, {

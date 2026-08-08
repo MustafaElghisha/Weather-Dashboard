@@ -1,19 +1,15 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import Card from "./Card";
-import { getWeather } from "../../api";
-import WeatherIcon from "../WeatherIcon";
+import useWeather from "@/hooks/useWeather";
 import type { coords } from "../../types/map";
+
+import WeatherIcon from "../WeatherIcon";
 
 type CurrentWeatherProps = { coords: coords };
 
 export default function CurrentWeather({
   coords: { lat, lng },
 }: CurrentWeatherProps) {
-  const { data } = useSuspenseQuery({
-    queryKey: ["weather", lat, lng],
-    queryFn: () => getWeather({ lat, lng }),
-    refetchOnWindowFocus: false,
-  });
+  const weatherData = useWeather(lat, lng);
 
   return (
     <Card
@@ -23,11 +19,14 @@ export default function CurrentWeather({
     >
       <div className="flex flex-col items-center gap-2">
         <h2 className="text-center text-6xl font-semibold">
-          {Math.round(data.current.temp)}°C
+          {Math.round(weatherData.current.temp)}°C
         </h2>
-        <WeatherIcon src={data.current.weather[0].icon} className="size-14" />
+        <WeatherIcon
+          src={weatherData.current.weather[0].icon}
+          className="size-14"
+        />
         <h3 className="text-xl capitalize">
-          {data.current.weather[0].description}
+          {weatherData.current.weather[0].description}
         </h3>
       </div>
       <div className="flex flex-col items-center gap-2">
@@ -36,22 +35,22 @@ export default function CurrentWeather({
           {new Intl.DateTimeFormat("en-US", {
             hour: "2-digit",
             minute: "2-digit",
-            timeZone: data.timezone,
-          }).format(new Date(data.current.dt * 1000))}
+            timeZone: weatherData.timezone,
+          }).format(new Date(weatherData.current.dt * 1000))}
         </h3>
       </div>
       <div className="flex justify-between">
         <div className="flex flex-col items-center gap-2">
           <p className="text-gray-500">Feels</p>
-          <p>{Math.round(data.current.feels_like)}°C</p>
+          <p>{Math.round(weatherData.current.feels_like)}°C</p>
         </div>
         <div className="flex flex-col items-center gap-2">
           <p className="text-gray-500">Humdity</p>
-          <p>{Math.round(data.current.humidity)}%</p>
+          <p>{Math.round(weatherData.current.humidity)}%</p>
         </div>
         <div className="flex flex-col items-center gap-2">
           <p className="text-gray-500">Wind</p>
-          <p>{Math.round(data.current.wind_speed)} kph</p>
+          <p>{Math.round(weatherData.current.wind_speed)} kph</p>
         </div>
       </div>
     </Card>
