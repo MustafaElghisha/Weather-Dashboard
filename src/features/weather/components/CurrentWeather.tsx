@@ -33,6 +33,7 @@ export default function CurrentWeather() {
           {new Intl.DateTimeFormat("en-US", {
             hour: "2-digit",
             minute: "2-digit",
+            hour12: true,
             timeZone: weatherData.timezone,
           }).format(new Date(weatherData.current.dt * 1000))}
         </h3>

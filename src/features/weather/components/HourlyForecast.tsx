@@ -21,6 +21,8 @@ export default function HourlyForecast() {
             {new Date(hour.dt * 1000).toLocaleTimeString(undefined, {
               hour: "numeric",
               minute: "2-digit",
+              hour12: true,
+              timeZone: "UTC",
             })}
           </p>
           <WeatherIcon src={hour.weather[0].icon} />

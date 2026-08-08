@@ -44,6 +44,8 @@ function FormatComponent({ value, number }: { value: string; number: number }) {
     return new Date(number * 1000).toLocaleTimeString(undefined, {
       hour: "2-digit",
       minute: "2-digit",
+      hour12: true,
+      timeZone: "UTC",
     });
 
   if (value === "wind_deg")
