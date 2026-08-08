@@ -74,6 +74,10 @@ export default function Map({ mapType, setLocation }: MapProps) {
 
       <TileLayer
         url={`https://tile.openweathermap.org/map/${mapType + "_new"}/{z}/{x}/{y}.png?appid=${API_KEY}`}
+        noWrap={true}
+        minZoom={2}
+        tileSize={512}
+        zoomOffset={-1}
       />
       <Marker position={[lat, lng]} />
     </MapContainer>
