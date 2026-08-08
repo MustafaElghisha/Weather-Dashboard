@@ -32,12 +32,12 @@ export default function Sidebar({
   return (
     <aside
       className={clsx(
-        "bg-sidebar border-sidebar-border fixed top-0 right-0 h-dvh w-(--sidebar-width) scrollbar-none overflow-y-scroll border px-3 py-6 shadow-md transition-transform duration-500 sm:p-4 lg:translate-x-0!",
+        "bg-sidebar border-sidebar-border fixed top-0 right-0 h-dvh w-(--sidebar-width) scrollbar-none overflow-y-scroll border px-3 py-6 shadow-md transition-transform duration-500 lg:translate-x-0!",
         isSidebarOpen ? "translate-x-0" : "translate-x-full",
       )}
     >
       <div className="mb-4 flex justify-between">
-        <h1 className="text-2xl font-bold">Air Pollution</h1>
+        <h2 className="text-2xl font-bold">Air Pollution</h2>
         <button onClick={() => setIsSidebarOpen(false)}>
           <Chevron className="size-6 rotate-180 cursor-pointer lg:hidden" />
         </button>

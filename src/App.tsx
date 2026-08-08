@@ -21,6 +21,7 @@ import { Separator } from "@/components/ui/separator";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [location, setLocation] = useState("");
   const [mapType, setMapType] = useState<MapType>("precipitation");
 
   return (
@@ -35,7 +36,7 @@ function App() {
           <Separator className="order-1" />
 
           <div className="header:order-0 header:mx-0 order-1 mx-auto flex items-center gap-2">
-            <CityPicker />
+            <CityPicker location={location} setLocation={setLocation} />
             <Separator orientation="vertical" />
             <MapTypePicker mapType={mapType} setMapType={setMapType} />
           </div>
@@ -51,7 +52,7 @@ function App() {
 
         <main className="grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-[70dvh_auto_auto]">
           <div className="relative order-1 h-[50dvh] sm:col-span-2 sm:h-[60dvh] 2xl:col-span-4 2xl:h-auto">
-            <Map mapType={mapType} />
+            <Map mapType={mapType} setLocation={setLocation} />
             <MapLegend mapType={mapType} />
           </div>
           <section className="order-2 col-span-1 2xl:row-start-2 2xl:row-end-4">

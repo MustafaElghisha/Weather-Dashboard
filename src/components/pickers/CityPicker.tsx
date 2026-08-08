@@ -8,16 +8,19 @@ import {
   ComboboxList,
 } from "@/components/ui/combobox";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, type Dispatch, type SetStateAction } from "react";
 import { useCoordinates } from "../CoordinatesProvider";
 import MapLocation from "/src/assets/mapLocation.svg?react";
 
 const capitalize = (str: string) =>
   str?.charAt(0).toUpperCase() + str?.slice(1) || "";
 
-export default function CityPicker() {
-  const [location, setLocation] = useState("Cairo");
+type CityPickerProps = {
+  location: string;
+  setLocation: Dispatch<SetStateAction<string>>;
+};
 
+export default function CityPicker({ location, setLocation }: CityPickerProps) {
   const { setCoordinates } = useCoordinates();
 
   const { data: geocodeData } = useQuery({
@@ -37,15 +40,15 @@ export default function CityPicker() {
       value={capitalize(location)}
       onValueChange={(value) => value && setLocation(value)}
     >
-      <div className="relative flex w-37 items-center">
-        <MapLocation className="ti ti-map-pin text-muted-foreground pointer-events-none absolute left-3 size-4 text-sm" />
+      <div className="relative flex w-37 items-center xl:w-43">
+        <MapLocation className="absolute left-3 size-4" />
         <ComboboxInput
           placeholder="Select a city"
           className="border-2 pl-6"
           showClear
         />
       </div>
-      <ComboboxContent className="w-37">
+      <ComboboxContent className="w-37 xl:w-43">
         <ComboboxEmpty>No cities found.</ComboboxEmpty>
         <ComboboxList>
           {(city) => (

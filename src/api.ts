@@ -13,6 +13,7 @@ export async function getWeather({ lat, lng }: { lat: number; lng: number }) {
 }
 
 export async function getGeocode(location: string) {
+  if (location === "") return "";
   const res = await fetch(
     `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${API_KEY}`,
   );

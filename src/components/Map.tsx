@@ -3,14 +3,16 @@ import "leaflet/dist/leaflet.css";
 import type { coords } from "../types/map";
 import { useTheme } from "./ThemeProvider";
 import { useCoordinates } from "./CoordinatesProvider";
+import type { Dispatch, SetStateAction } from "react";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 type MapProps = {
   mapType: string;
+  setLocation: Dispatch<SetStateAction<string>>;
 };
 
-export default function Map({ mapType }: MapProps) {
+export default function Map({ mapType, setLocation }: MapProps) {
   const {
     coordinates: { lat, lng },
     setCoordinates,
@@ -19,6 +21,7 @@ export default function Map({ mapType }: MapProps) {
 
   function onMapClick({ lat, lng }: coords) {
     setCoordinates({ lat, lng });
+    setLocation("");
   }
 
   return (
