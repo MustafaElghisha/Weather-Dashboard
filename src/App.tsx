@@ -15,6 +15,7 @@ import MapTypePicker, {
 } from "./components/pickers/MapTypePicker";
 import { Suspense, useState } from "react";
 import Hamburger from "/src/assets/hamburger.svg?react";
+import WeatherStorm from "/src/assets/weatherStorm.svg?react";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 import { Separator } from "@/components/ui/separator";
 
@@ -24,14 +25,22 @@ function App() {
 
   return (
     <>
-      <div className="flex w-full flex-col gap-6 p-3 md:p-6 lg:w-[calc(100dvw-var(--sidebar-width))]">
-        <header className="flex flex-wrap justify-between gap-8">
-          <div className="flex items-center gap-3">
+      <div className="flex w-full flex-col gap-6 px-6 py-6 lg:w-[calc(100dvw-var(--sidebar-width))]">
+        <header className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <WeatherStorm className="-mb-2 size-6 md:size-8" />
+            <h1 className="text-2xl font-semibold md:text-3xl">Weatherly</h1>
+          </div>
+
+          <Separator className="order-1" />
+
+          <div className="header:order-0 header:mx-0 order-1 mx-auto flex items-center gap-2">
             <CityPicker />
             <Separator orientation="vertical" />
             <MapTypePicker mapType={mapType} setMapType={setMapType} />
           </div>
-          <div className="flex items-center gap-10">
+
+          <div className="flex items-center gap-6 md:gap-10">
             <ThemeSwitcher />
             <Hamburger
               className="size-6 rotate-180 cursor-pointer lg:hidden"

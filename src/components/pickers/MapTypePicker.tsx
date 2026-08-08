@@ -37,7 +37,7 @@ export default function MapTypePicker({
         setMapType(value?.toLocaleLowerCase() as MapType)
       }
     >
-      <SelectTrigger className="w-38 border-2">
+      <SelectTrigger className="w-37 border-2">
         <Layer />
         <SelectValue placeholder="Map Type" />
       </SelectTrigger>

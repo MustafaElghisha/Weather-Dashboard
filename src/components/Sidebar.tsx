@@ -32,7 +32,7 @@ export default function Sidebar({
   return (
     <aside
       className={clsx(
-        "bg-sidebar border-sidebar-border fixed top-0 right-0 h-dvh w-(--sidebar-width) scrollbar-none overflow-y-scroll border p-3 shadow-md transition-transform duration-500 sm:p-4 lg:translate-x-0!",
+        "bg-sidebar border-sidebar-border fixed top-0 right-0 h-dvh w-(--sidebar-width) scrollbar-none overflow-y-scroll border px-3 py-6 shadow-md transition-transform duration-500 sm:p-4 lg:translate-x-0!",
         isSidebarOpen ? "translate-x-0" : "translate-x-full",
       )}
     >

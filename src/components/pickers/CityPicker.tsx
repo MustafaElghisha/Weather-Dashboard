@@ -37,7 +37,7 @@ export default function CityPicker() {
       value={capitalize(location)}
       onValueChange={(value) => value && setLocation(value)}
     >
-      <div className="relative flex w-38 items-center">
+      <div className="relative flex w-37 items-center">
         <MapLocation className="ti ti-map-pin text-muted-foreground pointer-events-none absolute left-3 size-4 text-sm" />
         <ComboboxInput
           placeholder="Select a city"
@@ -45,7 +45,7 @@ export default function CityPicker() {
           showClear
         />
       </div>
-      <ComboboxContent className="w-38">
+      <ComboboxContent className="w-37">
         <ComboboxEmpty>No cities found.</ComboboxEmpty>
         <ComboboxList>
           {(city) => (
