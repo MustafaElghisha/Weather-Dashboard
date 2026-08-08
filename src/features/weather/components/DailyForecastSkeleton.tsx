@@ -1,0 +1,26 @@
+import Card from "../../../components/ui/Card";
+import { Skeleton } from "../../../components/ui/skeleton";
+
+export default function DailyForecastSkeleton() {
+  return (
+    <Card title="Daily Forecast" childrenClassName="flex flex-col gap-4">
+      {Array.from({ length: 8 }).map((_, index) => (
+        <div key={index} className="flex items-center justify-between">
+          <div className="flex-1">
+            <Skeleton className="h-6 w-8.5" />
+          </div>
+          <Skeleton className="size-8 rounded-full" />
+          <div className="flex-1">
+            <Skeleton className="ml-auto h-6 w-8.5" />
+          </div>
+          <div className="flex-1">
+            <Skeleton className="ml-auto h-6 w-8.5" />
+          </div>
+          <div className="flex-1">
+            <Skeleton className="ml-auto h-6 w-8.5" />
+          </div>
+        </div>
+      ))}
+    </Card>
+  );
+}
