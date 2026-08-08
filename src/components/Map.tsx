@@ -2,21 +2,25 @@ import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { coords } from "../types/map";
 import { useTheme } from "./ThemeProvider";
+import { useCoordinates } from "./CoordinatesProvider";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 type MapProps = {
-  coords: coords;
-  onMapClick: ({ lat, lng }: coords) => void;
   mapType: string;
 };
 
-export default function Map({
-  coords: { lat, lng },
-  onMapClick,
-  mapType,
-}: MapProps) {
+export default function Map({ mapType }: MapProps) {
+  const {
+    coordinates: { lat, lng },
+    setCoordinates,
+  } = useCoordinates();
   const { theme } = useTheme();
+
+  function onMapClick({ lat, lng }: coords) {
+    setCoordinates({ lat, lng });
+    // setLocation("custom");
+  }
 
   return (
     <MapContainer

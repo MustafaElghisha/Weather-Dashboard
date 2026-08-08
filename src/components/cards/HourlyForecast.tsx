@@ -1,14 +1,12 @@
 import Card from "./Card";
 import useWeather from "@/hooks/useWeather";
-import type { coords } from "../../types/map";
-
 import WeatherIcon from "../WeatherIcon";
+import { useCoordinates } from "../CoordinatesProvider";
 
-type HourlyForecastProps = { coords: coords };
-
-export default function HourlyForecast({
-  coords: { lat, lng },
-}: HourlyForecastProps) {
+export default function HourlyForecast() {
+  const {
+    coordinates: { lat, lng },
+  } = useCoordinates();
   const weatherData = useWeather(lat, lng);
 
   return (

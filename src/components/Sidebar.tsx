@@ -1,5 +1,4 @@
 import { getAirPolution } from "@/api";
-import type { coords } from "@/types/map";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Suspense, type Dispatch, type SetStateAction } from "react";
 import Card from "./cards/Card";
@@ -15,18 +14,21 @@ import {
 import Information from "/src/assets/information.svg?react";
 import Chevron from "/src/assets/ChevronLeft.svg?react";
 import SidebarSkeleton from "./skeletons/SidebarSkeleton";
+import { useCoordinates } from "./CoordinatesProvider";
 
 type SidebarProps = {
-  coords: coords;
   isSidebarOpen: boolean;
   setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function Sidebar({
-  coords: { lat, lng },
   isSidebarOpen,
   setIsSidebarOpen,
 }: SidebarProps) {
+  const {
+    coordinates: { lat, lng },
+  } = useCoordinates();
+
   return (
     <div
       className={clsx(

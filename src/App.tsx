@@ -13,45 +13,32 @@ import Sidebar from "./components/Sidebar";
 import MapTypeDropdown, {
   type MAP_TYPES_VALUES,
 } from "./components/dropdowns/MapTypeDropdown";
-
-import { getGeocode } from "./api";
-import type { coords } from "./types/map";
-
+// import { getGeocode } from "./api";
+// import type { coords } from "./types/map";
 import { Suspense, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-
+// import { useQuery } from "@tanstack/react-query";
 import Hamburger from "/src/assets/hamburger.svg?react";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 
 function App() {
-  const [coordinates, setCoordinates] = useState<coords>({
-    lat: 26.82,
-    lng: 30.8,
-  });
-
-  const [location, setLocation] = useState("cairo");
+  // const [location, setLocation] = useState("cairo");
 
   const [mapType, setMapType] = useState<MAP_TYPES_VALUES>("precipitation");
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const { data: geocodeData } = useQuery({
-    queryKey: ["geocode", location],
-    queryFn: () => getGeocode(location),
-  });
+  // const { data: geocodeData } = useQuery({
+  //   queryKey: ["geocode", location],
+  //   queryFn: () => getGeocode(location),
+  // });
 
-  function onMapClick({ lat, lng }: coords) {
-    setCoordinates({ lat, lng });
-    setLocation("custom");
-  }
-
-  const coords =
-    location === "custom"
-      ? coordinates
-      : {
-          lat: geocodeData?.[0].lat ?? coordinates.lat,
-          lng: geocodeData?.[0].lon ?? coordinates.lng,
-        };
+  // const coords =
+  //   location === "custom"
+  //     ? coordinates
+  //     : {
+  //         lat: geocodeData?.[0].lat ?? coordinates.lat,
+  //         lng: geocodeData?.[0].lon ?? coordinates.lng,
+  //       };
 
   return (
     <>
@@ -74,34 +61,33 @@ function App() {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-[70dvh_auto_auto]">
           <div className="relative order-1 h-[50dvh] sm:col-span-2 sm:h-[60dvh] 2xl:col-span-4 2xl:h-auto">
-            <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
+            <Map mapType={mapType} />
             <MapLegend mapType={mapType} />
           </div>
           <section className="order-2 col-span-1 2xl:row-start-2 2xl:row-end-4">
             <Suspense fallback={<CurrentWeatherSkeleton />}>
-              <CurrentWeather coords={coords} />
+              <CurrentWeather />
             </Suspense>
           </section>
           <section className="order-3 col-span-1 2xl:order-5 2xl:row-start-2 2xl:row-end-4">
             <Suspense fallback={<DailyForecastSkeleton />}>
-              <DailyForecast coords={coords} />
+              <DailyForecast />
             </Suspense>
           </section>
           <section className="order-4 col-span-1 sm:col-span-2 2xl:order-3 2xl:col-start-2 2xl:col-end-4 2xl:row-start-2 2xl:row-end-3">
             <Suspense fallback={<HourlyForecastSkeleton />}>
-              <HourlyForecast coords={coords} />
+              <HourlyForecast />
             </Suspense>
           </section>
           <section className="order-5 col-span-1 sm:col-span-2 2xl:order-4 2xl:col-start-2 2xl:col-end-4 2xl:row-start-3 2xl:row-end-4">
             <Suspense fallback={<AdditionalInfoSkeleton />}>
-              <AdditionalInfo coords={coords} />
+              <AdditionalInfo />
             </Suspense>
           </section>
         </div>
       </div>
 
       <Sidebar
-        coords={coords}
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />

@@ -1,14 +1,12 @@
 import Card from "./Card";
 import useWeather from "@/hooks/useWeather";
-import type { coords } from "../../types/map";
-
 import WeatherIcon from "../WeatherIcon";
+import { useCoordinates } from "../CoordinatesProvider";
 
-type DailyForecastProps = { coords: coords };
-
-export default function DailyForecast({
-  coords: { lat, lng },
-}: DailyForecastProps) {
+export default function DailyForecast() {
+  const {
+    coordinates: { lat, lng },
+  } = useCoordinates();
   const weatherData = useWeather(lat, lng);
 
   return (

@@ -1,7 +1,5 @@
 import Card from "./Card";
 import useWeather from "@/hooks/useWeather";
-import type { coords } from "../../types/map";
-
 import Sunrise from "/src/assets/sunrise.svg?react";
 import Sunset from "/src/assets/sunset.svg?react";
 import Cloud from "/src/assets/cloud.svg?react";
@@ -9,14 +7,12 @@ import Uv from "/src/assets/uv.svg?react";
 import Wind from "/src/assets/wind.svg?react";
 import Pressure from "/src/assets/pressure.svg?react";
 import UpArrow from "/src/assets/uparrow.svg?react";
+import { useCoordinates } from "../CoordinatesProvider";
 
-type AdditionalInfo = {
-  coords: coords;
-};
-
-export default function AdditionalInfo({
-  coords: { lat, lng },
-}: AdditionalInfo) {
+export default function AdditionalInfo() {
+  const {
+    coordinates: { lat, lng },
+  } = useCoordinates();
   const weatherData = useWeather(lat, lng);
 
   return (
