@@ -9,48 +9,29 @@ import AdditionalInfoSkeleton from "./components/skeletons/AdditionalInfoSkeleto
 import Map from "./components/Map";
 import MapLegend from "./components/MapLegend";
 import Sidebar from "./components/Sidebar";
-// import LocationDropdown from "./components/dropdowns/LocationDropdown";
-import MapTypeDropdown, {
-  type MAP_TYPES_VALUES,
-} from "./components/dropdowns/MapTypeDropdown";
-// import { getGeocode } from "./api";
-// import type { coords } from "./types/map";
+import CityPicker from "./components/pickers/CityPicker";
+import MapTypePicker, {
+  type MapType,
+} from "./components/pickers/MapTypePicker";
 import { Suspense, useState } from "react";
-// import { useQuery } from "@tanstack/react-query";
 import Hamburger from "/src/assets/hamburger.svg?react";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 
 function App() {
-  // const [location, setLocation] = useState("cairo");
-
-  const [mapType, setMapType] = useState<MAP_TYPES_VALUES>("precipitation");
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  // const { data: geocodeData } = useQuery({
-  //   queryKey: ["geocode", location],
-  //   queryFn: () => getGeocode(location),
-  // });
-
-  // const coords =
-  //   location === "custom"
-  //     ? coordinates
-  //     : {
-  //         lat: geocodeData?.[0].lat ?? coordinates.lat,
-  //         lng: geocodeData?.[0].lon ?? coordinates.lng,
-  //       };
+  const [mapType, setMapType] = useState<MapType>("precipitation");
 
   return (
     <>
       <div className="flex w-full flex-col gap-6 p-6 lg:w-[calc(100dvw-var(--sidebar-width))]">
         <div className="flex flex-wrap justify-between gap-8">
-          {/* <div className="flex gap-4">
+          <div className="flex gap-4">
             <h2 className="text-xl font-semibold">City: </h2>
-            <LocationDropdown location={location} setLocation={setLocation} />
-          </div> */}
+            <CityPicker />
+          </div>
           <div className="flex gap-4">
             <h2 className="text-xl font-semibold">Map Type: </h2>
-            <MapTypeDropdown mapType={mapType} setMapType={setMapType} />
+            <MapTypePicker mapType={mapType} setMapType={setMapType} />
           </div>
           <ThemeSwitcher />
           <Hamburger

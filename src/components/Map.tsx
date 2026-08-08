@@ -19,7 +19,6 @@ export default function Map({ mapType }: MapProps) {
 
   function onMapClick({ lat, lng }: coords) {
     setCoordinates({ lat, lng });
-    // setLocation("custom");
   }
 
   return (

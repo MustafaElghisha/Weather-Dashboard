@@ -10,20 +10,30 @@ import type { Dispatch, SetStateAction } from "react";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
 
-type MapTypeDropdownProps = {
-  mapType: MAP_TYPES_VALUES;
-  setMapType: Dispatch<SetStateAction<MAP_TYPES_VALUES>>;
+const MAP_TYPES = [
+  "clouds",
+  "precipitation",
+  "pressure",
+  "wind",
+  "temp",
+] as const;
+
+export type MapType = (typeof MAP_TYPES)[number];
+
+type MapTypePickerProps = {
+  mapType: MapType;
+  setMapType: Dispatch<SetStateAction<MapType>>;
 };
 
-export default function MapTypeDropdown({
+export default function MapTypePicker({
   mapType,
   setMapType,
-}: MapTypeDropdownProps) {
+}: MapTypePickerProps) {
   return (
     <Select
       value={capitalize(mapType)}
       onValueChange={(value) =>
-        setMapType(value?.toLocaleLowerCase() as MAP_TYPES_VALUES)
+        setMapType(value?.toLocaleLowerCase() as MapType)
       }
     >
       <SelectTrigger className="w-35">
@@ -45,13 +55,3 @@ export default function MapTypeDropdown({
     </Select>
   );
 }
-
-const MAP_TYPES = [
-  "clouds",
-  "precipitation",
-  "pressure",
-  "wind",
-  "temp",
-] as const;
-
-export type MAP_TYPES_VALUES = (typeof MAP_TYPES)[number];
