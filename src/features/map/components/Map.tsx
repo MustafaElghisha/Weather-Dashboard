@@ -43,12 +43,12 @@ export default function Map({ mapType, setLocation }: MapProps) {
   return (
     <MapContainer
       center={[lat, lng]}
-      zoom={3}
+      zoom={4}
       maxBounds={[
         [-90, -180],
         [90, 180],
       ]}
-      minZoom={2}
+      minZoom={2.5}
       maxBoundsViscosity={1.0}
       className="h-full w-full"
     >
@@ -58,7 +58,7 @@ export default function Map({ mapType, setLocation }: MapProps) {
         <TileLayer
           url={`https://api.maptiler.com/maps/backdrop-v4-dark/{z}/{x}/{y}@2x.png?key=zekAGYe1TUVm0MkRxA2k`}
           noWrap={true}
-          minZoom={2}
+          minZoom={2.5}
           tileSize={512}
           zoomOffset={-1}
         />
@@ -66,7 +66,7 @@ export default function Map({ mapType, setLocation }: MapProps) {
         <TileLayer
           url={`https://api.maptiler.com/maps/dataviz-v4/{z}/{x}/{y}@2x.png?key=zekAGYe1TUVm0MkRxA2k`}
           noWrap={true}
-          minZoom={2}
+          minZoom={2.5}
           tileSize={512}
           zoomOffset={-1}
         />

@@ -6,7 +6,7 @@ export default function HourlyForecastSkeleton() {
     <Card
       title="Hourly Forecast (48 Hours)"
       className="2xl:h-full"
-      childrenClassName="flex gap-6 overflow-scroll 2xl:h-full"
+      childrenClassName="flex gap-6 overflow-scroll 2xl:h-full scrollbar-none"
     >
       {Array.from({ length: 48 }).map((_, index) => (
         <div key={index} className="flex flex-col items-center gap-2 p-2">
