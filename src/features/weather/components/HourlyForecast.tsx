@@ -18,11 +18,11 @@ export default function HourlyForecast() {
       {weatherData.hourly.map((hour) => (
         <div key={hour.dt} className="flex flex-col items-center gap-2 p-2">
           <p className="whitespace-nowrap">
-            {new Date(hour.dt * 1000).toLocaleTimeString(undefined, {
-              hour: "numeric",
+            {new Date(hour.dt * 1000).toLocaleTimeString("en-US", {
+              hour: "2-digit",
               minute: "2-digit",
               hour12: true,
-              timeZone: "UTC",
+              timeZone: weatherData.timezone,
             })}
           </p>
           <WeatherIcon src={hour.weather[0].icon} />
