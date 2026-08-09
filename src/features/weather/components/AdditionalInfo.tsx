@@ -31,6 +31,7 @@ export default function AdditionalInfo() {
             <FormatComponent
               value={value}
               number={weatherData.current[value]}
+              timeZone={weatherData.timezone}
             />
           </span>
         </div>
@@ -39,13 +40,21 @@ export default function AdditionalInfo() {
   );
 }
 
-function FormatComponent({ value, number }: { value: string; number: number }) {
+function FormatComponent({
+  value,
+  number,
+  timeZone,
+}: {
+  value: string;
+  number: number;
+  timeZone: string;
+}) {
   if (value === "sunrise" || value === "sunset")
-    return new Date(number * 1000).toLocaleTimeString(undefined, {
+    return new Date(number * 1000).toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
       hour12: true,
-      timeZone: "UTC",
+      timeZone: timeZone,
     });
 
   if (value === "wind_deg")

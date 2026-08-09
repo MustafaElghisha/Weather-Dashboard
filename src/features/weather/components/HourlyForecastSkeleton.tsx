@@ -10,7 +10,7 @@ export default function HourlyForecastSkeleton() {
     >
       {Array.from({ length: 48 }).map((_, index) => (
         <div key={index} className="flex flex-col items-center gap-2 p-2">
-          <Skeleton className="h-6 w-16.5" />
+          <Skeleton className="h-6 w-18" />
           <Skeleton className="size-8 rounded-full" />
           <Skeleton className="h-6 w-9" />
         </div>
