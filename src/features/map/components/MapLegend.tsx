@@ -13,7 +13,7 @@ export default function MapLegend({ mapType }: MapLegendProps) {
 
   return (
     <div className="bg-sidebar/70 absolute top-4 right-4 flex w-[min(50%,400px)] flex-col gap-3 rounded-xl border p-4 shadow-lg">
-      <h3 className="text-foreground text-sm font-semibold">{data.label}</h3>
+      <p className="text-foreground text-sm font-semibold">{data.label}</p>
       <div
         className="outline-accent h-6 w-full rounded-xl border dark:border-none"
         style={{ background: `linear-gradient(to right, ${gradientStops})` }}
