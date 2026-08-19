@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Suspense, type Dispatch, type SetStateAction } from "react";
-import Card from "../../../components/ui/Card";
+import Card from "../../../components/Card";
 import { Slider } from "../../../components/ui/slider";
 import clsx from "clsx";
 import {

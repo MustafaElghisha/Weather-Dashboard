@@ -1,4 +1,4 @@
-import Card from "../../../components/ui/Card";
+import Card from "../../../components/Card";
 import useWeather from "@/features/weather/hooks/useWeather";
 import Sunrise from "/src/assets/sunrise.svg?react";
 import Sunset from "/src/assets/sunset.svg?react";

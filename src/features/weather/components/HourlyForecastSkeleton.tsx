@@ -1,4 +1,4 @@
-import Card from "../../../components/ui/Card";
+import Card from "../../../components/Card";
 import { Skeleton } from "../../../components/ui/skeleton";
 
 export default function HourlyForecastSkeleton() {

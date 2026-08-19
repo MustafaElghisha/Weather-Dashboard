@@ -6,7 +6,6 @@ const GeocodeSchema = z.object({
   lat: z.number(),
   lon: z.number(),
   country: z.string(),
-  state: z.string().optional(),
 });
 
 // The API returns an array of Geocodes
