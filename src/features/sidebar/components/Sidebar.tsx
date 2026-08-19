@@ -1,6 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Suspense, type Dispatch, type SetStateAction } from "react";
-import Card from "../../../components/Card";
 import { Slider } from "../../../components/ui/slider";
 import clsx from "clsx";
 import {
@@ -15,6 +14,7 @@ import Chevron from "/src/assets/ChevronLeft.svg?react";
 import SidebarSkeleton from "./SidebarSkeleton";
 import { useCoordinates } from "../../../app/CoordinatesProvider";
 import { getAirPollution } from "../api/getAirPollution";
+import { Card, CardContent } from "@/components/ui/card";
 
 type SidebarProps = {
   isSidebarOpen: boolean;
@@ -57,68 +57,69 @@ function AirPollution({ lat, lng }: { lat: number; lng: number }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <Card
-        className="from-secondary to-secondary/60 transition-transform duration-300 hover:scale-105"
-        childrenClassName="flex flex-col gap-3"
-      >
-        <div className="flex justify-between">
-          <div className="flex items-center gap-1">
-            <span className="text-lg font-bold uppercase">AQI</span>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger render={<Information className="size-3" />} />
-                <TooltipContent>
-                  <p>
-                    Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1 =
-                    Good, 2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+      <Card className="transition-transform duration-300 hover:scale-105">
+        <CardContent className="flex flex-col gap-3">
+          <div className="flex justify-between">
+            <div className="flex items-center gap-1">
+              <span className="text-lg font-bold uppercase">AQI</span>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger render={<Information className="size-3" />} />
+                  <TooltipContent>
+                    <p>
+                      Air Quality Index. Possible values: 1, 2, 3, 4, 5. Where 1
+                      = Good, 2 = Fair, 3 = Moderate, 4 = Poor, 5 = Very Poor.
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
+
+            <span className="text-lg font-semibold">
+              {data.list[0].main.aqi}
+            </span>
           </div>
+          <Slider disabled min={1} max={5} value={data.list[0].main.aqi} />
+          <div className="flex justify-between text-xs">
+            <span className="text-gray-500">1</span>
+            <span className="text-gray-500">5</span>
+          </div>
+          <ol className="flex justify-between">
+            {AIR_QUALITY_LEVELS.map((quality, index) => {
+              const currentLevel = (() => {
+                switch (data.list[0].main.aqi) {
+                  case 1:
+                    return "Good";
+                  case 2:
+                    return "Fair";
+                  case 3:
+                    return "Moderate";
+                  case 4:
+                    return "Poor";
+                  default:
+                    return "Very Poor";
+                }
+              })();
 
-          <span className="text-lg font-semibold">{data.list[0].main.aqi}</span>
-        </div>
-        <Slider disabled min={1} max={5} value={data.list[0].main.aqi} />
-        <div className="flex justify-between text-xs">
-          <span className="text-gray-500">1</span>
-          <span className="text-gray-500">5</span>
-        </div>
-        <ol className="flex justify-between">
-          {AIR_QUALITY_LEVELS.map((quality, index) => {
-            const currentLevel = (() => {
-              switch (data.list[0].main.aqi) {
-                case 1:
-                  return "Good";
-                case 2:
-                  return "Fair";
-                case 3:
-                  return "Moderate";
-                case 4:
-                  return "Poor";
-                default:
-                  return "Very Poor";
-              }
-            })();
-
-            return (
-              <li
-                key={quality}
-                className={clsx(
-                  "rounded-md border px-2 py-1 text-xs font-semibold",
-                  index + 1 === data.list[0].main.aqi
-                    ? clsx(
-                        getQualityColor(currentLevel as AirQualityLevel),
-                        "text-muted",
-                      )
-                    : "bg-muted text-muted-foreground",
-                )}
-              >
-                {quality}
-              </li>
-            );
-          })}
-        </ol>
+              return (
+                <li
+                  key={quality}
+                  className={clsx(
+                    "rounded-md border px-2 py-1 text-xs font-semibold",
+                    index + 1 === data.list[0].main.aqi
+                      ? clsx(
+                          getQualityColor(currentLevel as AirQualityLevel),
+                          "text-muted",
+                        )
+                      : "bg-muted text-muted-foreground",
+                  )}
+                >
+                  {quality}
+                </li>
+              );
+            })}
+          </ol>
+        </CardContent>
       </Card>
 
       {Object.entries(data.list[0].components).map(([key, value]) => {
@@ -139,52 +140,53 @@ function AirPollution({ lat, lng }: { lat: number; lng: number }) {
         return (
           <Card
             key={key}
-            className="from-secondary to-secondary/60 transition-transform duration-300 hover:scale-105"
-            childrenClassName="flex flex-col gap-3"
+            className="transition-transform duration-300 hover:scale-105"
           >
-            <div className="flex justify-between">
-              <div className="flex items-center gap-1">
-                <span className="text-lg font-bold uppercase">{key}</span>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger
-                      render={<Information className="size-3" />}
-                    />
-                    <TooltipContent>
-                      <p>
-                        Сoncentration of&nbsp;
-                        {pollutantNameMapping[key.toUpperCase() as Pollutant]}
-                      </p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </div>
+            <CardContent className="flex flex-col gap-3">
+              <div className="flex justify-between">
+                <div className="flex items-center gap-1">
+                  <span className="text-lg font-bold uppercase">{key}</span>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger
+                        render={<Information className="size-3" />}
+                      />
+                      <TooltipContent>
+                        <p>
+                          Сoncentration of&nbsp;
+                          {pollutantNameMapping[key.toUpperCase() as Pollutant]}
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </div>
 
-              <span className="text-lg font-semibold">{value}</span>
-            </div>
-            <Slider disabled min={0} max={max} value={value} />
-            <div className="flex justify-between text-xs">
-              <span className="text-gray-500">0</span>
-              <span className="text-gray-500">{max}</span>
-            </div>
-            <ol className="flex justify-between">
-              {Object.keys(pollutant).map((quality) => (
-                <li
-                  key={quality}
-                  className={clsx(
-                    "rounded-md border px-2 py-1 text-xs font-semibold",
-                    quality === currentLevel
-                      ? clsx(
-                          getQualityColor(currentLevel as AirQualityLevel),
-                          "text-muted",
-                        )
-                      : "bg-muted text-muted-foreground",
-                  )}
-                >
-                  {quality}
-                </li>
-              ))}
-            </ol>
+                <span className="text-lg font-semibold">{value}</span>
+              </div>
+              <Slider disabled min={0} max={max} value={value} />
+              <div className="flex justify-between text-xs">
+                <span className="text-gray-500">0</span>
+                <span className="text-gray-500">{max}</span>
+              </div>
+              <ol className="flex justify-between">
+                {Object.keys(pollutant).map((quality) => (
+                  <li
+                    key={quality}
+                    className={clsx(
+                      "rounded-md border px-2 py-1 text-xs font-semibold",
+                      quality === currentLevel
+                        ? clsx(
+                            getQualityColor(currentLevel as AirQualityLevel),
+                            "text-muted",
+                          )
+                        : "bg-muted text-muted-foreground",
+                    )}
+                  >
+                    {quality}
+                  </li>
+                ))}
+              </ol>
+            </CardContent>
           </Card>
         );
       })}

@@ -1,4 +1,3 @@
-import Card from "../../../components/Card";
 import useWeather from "@/features/weather/hooks/useWeather";
 import Sunrise from "/src/assets/sunrise.svg?react";
 import Sunset from "/src/assets/sunset.svg?react";
@@ -8,6 +7,7 @@ import Wind from "/src/assets/wind.svg?react";
 import Pressure from "/src/assets/pressure.svg?react";
 import UpArrow from "/src/assets/uparrow.svg?react";
 import { useCoordinates } from "../../../app/CoordinatesProvider";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function AdditionalInfo() {
   const {
@@ -16,26 +16,29 @@ export default function AdditionalInfo() {
   const weatherData = useWeather(lat, lng);
 
   return (
-    <Card
-      title="Additional Weather Info"
-      className="2xl:h-full"
-      childrenClassName="flex flex-col gap-8 2xl:grid 2xl:grid-cols-2 2xl:grid-rows-3 2xl:h-full"
-    >
-      {rows.map(({ label, value, Icon }) => (
-        <div key={label} className="flex justify-between">
-          <div className="flex gap-4">
-            <span className="text-gray-500">{label}</span>
-            <Icon className="size-6" />
+    <Card className="2xl:h-full">
+      <CardHeader>
+        <CardTitle className="text-2xl font-semibold">
+          Additional Weather Info
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-8 2xl:grid 2xl:h-full 2xl:grid-cols-2 2xl:grid-rows-3">
+        {rows.map(({ label, value, Icon }) => (
+          <div key={label} className="flex justify-between">
+            <div className="flex gap-4">
+              <span className="text-gray-500">{label}</span>
+              <Icon className="size-6" />
+            </div>
+            <span>
+              <FormatComponent
+                value={value}
+                number={weatherData.current[value]}
+                timeZone={weatherData.timezone}
+              />
+            </span>
           </div>
-          <span>
-            <FormatComponent
-              value={value}
-              number={weatherData.current[value]}
-              timeZone={weatherData.timezone}
-            />
-          </span>
-        </div>
-      ))}
+        ))}
+      </CardContent>
     </Card>
   );
 }
