@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Suspense, type Dispatch, type SetStateAction } from "react";
-import { Slider } from "../../../components/ui/slider";
+import { Slider } from "@/components/ui/slider";
 import clsx from "clsx";
 import {
   Tooltip,
@@ -12,7 +12,7 @@ import {
 import Information from "/src/assets/information.svg?react";
 import Chevron from "/src/assets/ChevronLeft.svg?react";
 import SidebarSkeleton from "./SidebarSkeleton";
-import { useCoordinates } from "../../../app/CoordinatesProvider";
+import { useCoordinates } from "@/app/CoordinatesProvider";
 import { getAirPollution } from "../api/getAirPollution";
 import { Card, CardContent } from "@/components/ui/card";
 

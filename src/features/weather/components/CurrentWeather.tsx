@@ -1,6 +1,6 @@
 import useWeather from "@/features/weather/hooks/useWeather";
-import WeatherIcon from "../../../components/ui/WeatherIcon";
-import { useCoordinates } from "../../../app/CoordinatesProvider";
+import WeatherIcon from "@/components/ui/WeatherIcon";
+import { useCoordinates } from "@/app/CoordinatesProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function CurrentWeather() {
