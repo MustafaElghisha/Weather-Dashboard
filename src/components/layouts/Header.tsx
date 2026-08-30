@@ -1,8 +1,8 @@
 import CityPicker from "@/features/location/components/CityPicker";
 import MapTypePicker from "@/features/map/components/MapTypePicker";
 import ThemeSwitcher from "@/features/theme/components/ThemeSwitcher";
+import Hamburger from "/src/assets/hamburger.svg?react";
 import WeatherStorm from "/src/assets/weatherStorm.svg?react";
-import { Hamburger } from "lucide-react";
 import { Separator } from "../ui/separator";
 import type { MapType } from "@/features/map/lib/mapTypes";
 
