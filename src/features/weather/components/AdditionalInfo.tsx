@@ -2,7 +2,7 @@ import useWeather from "@/features/weather/hooks/useWeather";
 import { useCoordinates } from "@/app/CoordinatesProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { rows } from "../constants/data";
-import FormatWeatherValue from "../utils/formatWeatherValue";
+import FormatWeatherValue from "../utils/FormatWeatherValue";
 
 export default function AdditionalInfo() {
   const {
