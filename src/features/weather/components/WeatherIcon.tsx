@@ -13,7 +13,7 @@ export default function WeatherIcon({ src, className }: WeatherIconProps) {
       className={clsx("size-8", className)}
       src={
         isDev
-          ? `https://openweathermap.org/img/wn/${src}@2x.png`
+          ? `https://openweathermap.org/img/wn/${src}@4x.png`
           : `/api/weather-icon?icon=${src}`
       }
       alt="Weather Icon"

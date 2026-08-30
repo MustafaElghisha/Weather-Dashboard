@@ -1,13 +1,8 @@
 import useWeather from "@/features/weather/hooks/useWeather";
-import Sunrise from "/src/assets/sunrise.svg?react";
-import Sunset from "/src/assets/sunset.svg?react";
-import Cloud from "/src/assets/cloud.svg?react";
-import Uv from "/src/assets/uv.svg?react";
-import Wind from "/src/assets/wind.svg?react";
-import Pressure from "/src/assets/pressure.svg?react";
-import UpArrow from "/src/assets/uparrow.svg?react";
 import { useCoordinates } from "@/app/CoordinatesProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { rows } from "../constants/data";
+import FormatWeatherValue from "../utils/formatWeatherValue";
 
 export default function AdditionalInfo() {
   const {
@@ -30,7 +25,7 @@ export default function AdditionalInfo() {
               <Icon className="size-6" />
             </div>
             <span>
-              <FormatComponent
+              <FormatWeatherValue
                 value={value}
                 number={weatherData.current[value]}
                 timeZone={weatherData.timezone}
@@ -42,64 +37,3 @@ export default function AdditionalInfo() {
     </Card>
   );
 }
-
-function FormatComponent({
-  value,
-  number,
-  timeZone,
-}: {
-  value: string;
-  number: number;
-  timeZone: string;
-}) {
-  if (value === "sunrise" || value === "sunset")
-    return new Date(number * 1000).toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true,
-      timeZone: timeZone,
-    });
-
-  if (value === "wind_deg")
-    return (
-      <UpArrow
-        className="size-6"
-        style={{ transform: `rotate(${number}deg)` }}
-      />
-    );
-
-  return number;
-}
-
-const rows = [
-  {
-    label: "Cloudiness (%)",
-    value: "clouds",
-    Icon: Cloud,
-  },
-  {
-    label: "UV Index",
-    value: "uvi",
-    Icon: Uv,
-  },
-  {
-    label: "Wind Direction",
-    value: "wind_deg",
-    Icon: Wind,
-  },
-  {
-    label: "Pressure (hPa)",
-    value: "pressure",
-    Icon: Pressure,
-  },
-  {
-    label: "Sunrise",
-    value: "sunrise",
-    Icon: Sunrise,
-  },
-  {
-    label: "Sunset",
-    value: "sunset",
-    Icon: Sunset,
-  },
-] as const;

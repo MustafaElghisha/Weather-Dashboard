@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import useWeather from "@/features/weather/hooks/useWeather";
-import WeatherIcon from "@/components/ui/WeatherIcon";
+import WeatherIcon from "@/features/weather/components/WeatherIcon";
 import { useCoordinates } from "@/app/CoordinatesProvider";
 
 export default function DailyForecast() {

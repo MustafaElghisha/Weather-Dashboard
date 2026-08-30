@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function SideCardSkeleton() {
+export default function PollutionMeterCardSkeleton() {
   return (
     <Card className="transition-transform duration-300 hover:scale-105">
       <CardContent className="flex flex-col gap-3">

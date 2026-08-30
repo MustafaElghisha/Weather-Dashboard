@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState } from "react";
 
 type coords = {
   lat: number;
@@ -11,7 +11,7 @@ type CoordinatesContextType = {
 };
 
 type CoordinatesProviderProps = {
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
 const CoordinatesContext = createContext<undefined | CoordinatesContextType>(
@@ -33,6 +33,7 @@ export default function CoordinatesProvider({
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useCoordinates = () => {
   const context = useContext(CoordinatesContext);
   if (!context)

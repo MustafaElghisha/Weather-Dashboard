@@ -8,18 +8,9 @@ import {
 } from "@/components/ui/select";
 import type { Dispatch, SetStateAction } from "react";
 import Layer from "/src/assets/layer.svg?react";
+import { MAP_TYPES, type MapType } from "../lib/mapTypes";
 
 const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
-
-const MAP_TYPES = [
-  "clouds",
-  "precipitation",
-  "pressure",
-  "wind",
-  "temp",
-] as const;
-
-export type MapType = (typeof MAP_TYPES)[number];
 
 type MapTypePickerProps = {
   mapType: MapType;

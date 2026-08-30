@@ -10,3 +10,5 @@ const GeocodeSchema = z.object({
 
 // The API returns an array of Geocodes
 export const GeocodeResponseSchema = z.array(GeocodeSchema);
+
+export type GeocodeResponseSchemaType = z.infer<typeof GeocodeResponseSchema>;

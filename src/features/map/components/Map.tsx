@@ -1,12 +1,13 @@
 import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
+import L, { type LeafletMouseEvent } from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import { useTheme } from "../../../app/ThemeProvider";
-import { useCoordinates } from "../../../app/CoordinatesProvider";
-import type { Dispatch, SetStateAction } from "react";
+import { useTheme } from "@/app/ThemeProvider";
+import { useCoordinates } from "@/app/CoordinatesProvider";
+import { useEffect, type Dispatch, type SetStateAction } from "react";
+import type { MapType } from "../lib/mapTypes";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -16,7 +17,8 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-const API_KEY = import.meta.env.VITE_API_KEY;
+const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
+const MAPTILER_API_KEY = import.meta.env.VITE_MAPTILER_API_KEY;
 
 type coords = {
   lat: number;
@@ -24,7 +26,7 @@ type coords = {
 };
 
 type MapProps = {
-  mapType: string;
+  mapType: MapType;
   setLocation: Dispatch<SetStateAction<string>>;
 };
 
@@ -56,7 +58,7 @@ export default function Map({ mapType, setLocation }: MapProps) {
 
       {theme === "dark" ? (
         <TileLayer
-          url={`https://api.maptiler.com/maps/backdrop-v4-dark/{z}/{x}/{y}@2x.png?key=zekAGYe1TUVm0MkRxA2k`}
+          url={`https://api.maptiler.com/maps/backdrop-v4-dark/{z}/{x}/{y}@2x.png?key=${MAPTILER_API_KEY}`}
           noWrap={true}
           minZoom={2.5}
           tileSize={512}
@@ -64,7 +66,7 @@ export default function Map({ mapType, setLocation }: MapProps) {
         />
       ) : (
         <TileLayer
-          url={`https://api.maptiler.com/maps/dataviz-v4/{z}/{x}/{y}@2x.png?key=zekAGYe1TUVm0MkRxA2k`}
+          url={`https://api.maptiler.com/maps/dataviz-v4/{z}/{x}/{y}@2x.png?key=${MAPTILER_API_KEY}`}
           noWrap={true}
           minZoom={2.5}
           tileSize={512}
@@ -73,7 +75,7 @@ export default function Map({ mapType, setLocation }: MapProps) {
       )}
 
       <TileLayer
-        url={`https://tile.openweathermap.org/map/${mapType + "_new"}/{z}/{x}/{y}.png?appid=${API_KEY}`}
+        url={`https://tile.openweathermap.org/map/${mapType + "_new"}/{z}/{x}/{y}.png?appid=${OPENWEATHER_API_KEY}`}
         noWrap={true}
         minZoom={2}
         tileSize={512}
@@ -92,10 +94,23 @@ function MapClick({
   onMapClick: ({ lat, lng }: coords) => void;
 }) {
   const map = useMap();
+
+  useEffect(() => {
+    const handleClick = (e: LeafletMouseEvent) => {
+      onMapClick({
+        lat: e.latlng.lat,
+        lng: e.latlng.lng,
+      });
+    };
+
+    map.on("click", handleClick);
+
+    return () => {
+      map.off("click", handleClick);
+    };
+  }, [map, onMapClick]);
+
   map.panTo({ lat, lng });
-  map.on("click", (e) => {
-    const { lat, lng } = e.latlng;
-    onMapClick({ lat, lng });
-  });
+
   return null;
 }

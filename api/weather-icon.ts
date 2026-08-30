@@ -5,7 +5,7 @@ export default async function handler(request: Request) {
   const icon = url.searchParams.get("icon");
 
   const response = await fetch(
-    `https://openweathermap.org/img/wn/${icon}@2x.png`,
+    `https://openweathermap.org/img/wn/${icon}@4x.png`,
     {
       headers: {
         referer: "https://openweathermap.org/",

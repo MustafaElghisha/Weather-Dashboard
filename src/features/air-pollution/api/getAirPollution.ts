@@ -1,6 +1,6 @@
 import { AirPollutionResponseSchema } from "../schemas/pollutionSchema";
 
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 export async function getAirPollution({
   lat,

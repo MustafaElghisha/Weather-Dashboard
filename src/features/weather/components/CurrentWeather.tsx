@@ -1,5 +1,5 @@
 import useWeather from "@/features/weather/hooks/useWeather";
-import WeatherIcon from "@/components/ui/WeatherIcon";
+import WeatherIcon from "@/features/weather/components/WeatherIcon";
 import { useCoordinates } from "@/app/CoordinatesProvider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -49,12 +49,12 @@ export default function CurrentWeather() {
             <p>{Math.round(weatherData.current.feels_like)}°C</p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <p className="text-gray-500">Humdity</p>
+            <p className="text-gray-500">Humidity</p>
             <p>{Math.round(weatherData.current.humidity)}%</p>
           </div>
           <div className="flex flex-col items-center gap-2">
             <p className="text-gray-500">Wind</p>
-            <p>{Math.round(weatherData.current.wind_speed)} kph</p>
+            <p>{Math.round(weatherData.current.wind_speed)} m/s</p>
           </div>
         </div>
       </CardContent>
